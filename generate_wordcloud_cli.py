@@ -107,7 +107,7 @@ def main():
                        help='输出图片路径 (默认: wordcloud.png)')
     parser.add_argument('-w', '--width', type=int, default=1920,
                        help='图片宽度 (默认: 1920)')
-    parser.add_argument('-h', '--height', type=int, default=1080,
+    parser.add_argument('--height', '-ht', type=int, default=1080,
                        help='图片高度 (默认: 1080)')
     parser.add_argument('--bg-color', default='black',
                        help='背景颜色 (默认: black)')
