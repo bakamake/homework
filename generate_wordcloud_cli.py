@@ -97,14 +97,7 @@ def generate_wordcloud(text, output_path, width=1920, height=1080,
     wordcloud.to_file(output_path)
     print(f"词云已保存到: {output_path}")
 
-    # 显示词云（可选）
-    plt.figure(figsize=(16, 9))
-    plt.imshow(wordcloud, interpolation='bilinear')
-    plt.axis('off')
-    plt.tight_layout(pad=0)
 
-    # 不显示图片，只保存文件
-    # plt.show()
 
     return wordcloud
 
@@ -129,8 +122,6 @@ def main():
                        help='禁用词汇搭配')
     parser.add_argument('--prefer-horizontal', type=float, default=0.9,
                        help='水平排列比例 (默认: 0.9)')
-    parser.add_argument('--show', action='store_true',
-                       help='显示词云图片')
 
     args = parser.parse_args()
 
@@ -168,10 +159,7 @@ def main():
     for i, (word, freq) in enumerate(list(words.items())[:20], 1):
         print(f"{i:2d}. {word:20s} - {freq:.3f}")
 
-    # 如果需要显示图片
-    if args.show:
-        plt.show()
-
+   
     print("\n" + "=" * 60)
     print("词云生成完成！")
     print("=" * 60)
