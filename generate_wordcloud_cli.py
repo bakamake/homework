@@ -42,12 +42,20 @@ def generate_wordcloud(text, output_path, width=1920, height=1080,
     print(f"最大词汇数: {max_words}")
     print(f"配色方案: {colormap}")
 
-    # 尝试使用系统字体，如果失败则使用默认字体
+    # 跨平台字体路径 - Windows/Linux/macOS
     font_paths = [
+        # Windows
+        os.path.join(os.environ.get('WINDIR', 'C:\\Windows'), 'Fonts', 'msyh.ttc'),
+        os.path.join(os.environ.get('WINDIR', 'C:\\Windows'), 'Fonts', 'msyhbd.ttc'),
+        os.path.join(os.environ.get('WINDIR', 'C:\\Windows'), 'Fonts', 'simsun.ttc'),
+        os.path.join(os.environ.get('WINDIR', 'C:\\Windows'), 'Fonts', 'simhei.ttf'),
+        os.path.join(os.environ.get('WINDIR', 'C:\\Windows'), 'Fonts', 'arial.ttf'),
+        # Linux
         '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',
-        '/System/Library/Fonts/Arial.ttf',
-        '/Windows/Fonts/arial.ttf',
         '/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf',
+        # macOS
+        '/System/Library/Fonts/Arial.ttf',
+        '/System/Library/Fonts/PingFang.ttc',
     ]
 
     font_path = None
