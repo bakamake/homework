@@ -34,12 +34,12 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: executables
-          path: dist/*.exe
+          path: dist/xu.exe, dist/chen.exe
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          files: *.exe
+          files: dist/xu.exe, dist/chen.exe
           draft: false
           prerelease: false
         env:
