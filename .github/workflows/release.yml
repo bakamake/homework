@@ -1,0 +1,46 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'  # 推送标签时触发，如 v1.0.0
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.14'
+
+      - name: Setup uv
+        uses: andgineer/uv-venv@v3
+
+      - name: Install pyinstaller
+        run: uv pip install pyinstaller
+
+      - name: Build chen.exe
+        run: uv run pyinstaller 海龟图.py --add-data="data.txt;." --onefile --clean --name="chen"
+
+      - name: Build xu.exe
+        run: uv run pyinstaller xu-海龟图.py --add-data="xu.txt;." --onefile --clean --name="xu"
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: executables
+          path: dist/*.exe
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: *.exe
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
